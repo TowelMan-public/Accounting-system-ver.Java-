@@ -16,9 +16,9 @@ public class LoginUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException { 
-		LoginForm input =new LoginForm();
-		input.setUsername(username);
-		LoginForm outPut = loginMapper.selectById(input);
+		//LoginForm input =new LoginForm();
+		//input.setUsername(username);
+		LoginForm outPut = loginMapper.selectById(username);
 		if(outPut == null) {
             throw new UsernameNotFoundException(username + " is not found");
         }
