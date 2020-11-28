@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 @Mapper
 public interface LoginMapper {
-	LoginForm selectById(String username);
+	LoginForm selectById(@Param("username") String username);
 }
