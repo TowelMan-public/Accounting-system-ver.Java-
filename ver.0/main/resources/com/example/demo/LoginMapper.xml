@@ -3,7 +3,7 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.LoginMapper">
-	<select id="selectById" resultType="LoginForm">
+	<select id="selectById" resultType="com.example.demo.LoginForm">
 		SELECT id AS username ,pass AS password
 			FROM useri
 		WHERE id = #{username}
