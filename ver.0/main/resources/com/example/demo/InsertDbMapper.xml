@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.InsertDbMapper">
+	<insert id="expensesItem">
+		INSERT INTO expenses_item(name,rate) VALUES(#{item},#{rate})
+	</insert>
+	<insert id="expenses">
+		INSERT INTO expenses(day,item,money) VALUES(#{date},#{expenses},#{money})
+	</insert>
+	<insert id="Sales">
+		INSERT INTO Sales(day,item,money,person,subject) VALUES(#{date},#{company},#{money},#{person},#{subject})
+		INSERT INTO paid(money) VALUES(0)
+	</insert>
+	<update id="paid">
+		UPDATE paid SET money = money + #{money} WHERE id=#{number}
+	</update>
+	<insert id="company">
+		INSERT INTO customer(name) VALUES(#{name})
+	</insert>
+</mapper>

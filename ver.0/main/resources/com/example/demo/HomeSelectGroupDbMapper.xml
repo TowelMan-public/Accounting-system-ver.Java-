@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.HomeSelectGroupDbMapper">
+	<select id="expenses" resultType="com.example.demo.ResultFormA">
+		WITH table1 AS(
+			SELECT t1.id AS 'id',TIME_FORMAT(t1.day,'%Y') AS 'year',TIME_FORMAT(t1.day,'%c') AS 'moon',t2.name AS 'item',t1.money AS 'money'
+				FROM expenses t1
+			INNER JOIN expenses_item t2
+				USING(item)
+			WHERE 1
+			<if test="#{!item.equals(empty)}">
+				AND t1.item = #{item}
+			</if>
+			<if test="#{!moon.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{moon}
+			</if>
+			<if test="#{!year.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{year}
+			</if>
+			<if test="#{!listStart.equals(empty)}">
+				AND t1.id >= #{listStart}
+			</if>
+			<if test="#{!listFinish.equals(empty)}">
+				AND #{listFinish} >= t1.id
+			</if>
+			<if test="#{trueSelect.equals(True)}">
+				AND t2.is_effectiveness = 1
+			</if>
+		)
+		SELECT 
+		<if test="#{yearSelect.equals(True)}">
+			year AS 'data1'
+		</if>
+		<if test="#{moonSelect.equals(True)}">
+			moon AS 'data2'
+		</if>
+		<if test="#{itemSelect.equals(True)}">
+			item AS 'data3'
+		</if>
+			SUM(money) AS 'data4'
+		FROM table1
+		GROUP BY 
+		<if test="#{yearSelect.equals(True)}">
+			year AS 'data1'
+		</if>
+		<if test="#{moonSelect.equals(True)}">
+			moon AS 'data2'
+		</if>
+		<if test="#{itemSelect.equals(True)}">
+			item AS 'data3'
+		</if>
+	</select>
+	<select id="Sales" resultType="com.example.demo.ResultFormA">
+		WITH table1 AS(
+			SELECT t1.sals_id AS 'id',TIME_FORMAT(t1.day,'%Y') AS 'year',TIME_FORMAT(t1.day,'%c') AS 'moon',t2.name AS 'item',t1.money AS 'money'
+				FROM sales t1
+			INNER JOIN customer t2
+				USING(item)
+			WHERE 1
+			<if test="#{!item.equals(empty)}">
+				AND t1.item = #{item}
+			</if>
+			<if test="#{!moon.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{moon}
+			</if>
+			<if test="#{!year.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{year}
+			</if>
+			<if test="#{!listStart.equals(empty)}">
+				AND t1.sals_id >= #{listStart}
+			</if>
+			<if test="#{!listFinish.equals(empty)}">
+				AND #{listFinish} >= t1.sals_id
+			</if>
+			<if test="#{trueSelect.equals(True)}">
+				AND t2.is_effectiveness = 1
+			</if>
+		)
+		SELECT 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+			SUM(money) AS 'data4'
+		FROM table1
+		GROUP BY 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+	</select>
+	<select id="paid" resultType="com.example.demo.ResultFormA">
+		WITH table1 AS(
+			SELECT t1.sals_id AS 'number',TIME_FORMAT(t1.day,'%Y') AS 'year',TIME_FORMAT(t1.day,'%c') AS 'moon',t2.name AS 'item',t3.money AS 'money'
+				FROM sales t1
+			INNER JOIN customer t2
+				USING(item)
+			INNER JOIN paid t3
+				USING(sals_id)
+			WHERE 1
+			<if test="#{!item.equals(empty)}">
+				AND t1.item = #{item}
+			</if>
+			<if test="#{!moon.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{moon}
+			</if>
+			<if test="#{!year.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{year}
+			</if>
+			<if test="#{!listStart.equals(empty)}">
+				AND t1.sals_id >= #{listStart}
+			</if>
+			<if test="#{!listFinish.equals(empty)}">
+				AND #{listFinish} >= t1.sals_id
+			</if>
+			<if test="#{trueSelect.equals(True)}">
+				AND t2.is_effectiveness = 1
+			</if>
+		)
+		SELECT 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+			SUM(money) AS 'data4'
+		FROM table1
+		GROUP BY 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+	</select>
+	<select id="unpaid" resultType="com.example.demo.ResultFormA">
+		WITH table1 AS(
+			SELECT t1.sals_id AS 'number',TIME_FORMAT(t1.day,'%Y') AS 'year',TIME_FORMAT(t1.day,'%c') AS 'moon',t2.name AS 'item',(t1.money - t3.money) AS 'money'
+				FROM sales t1
+			INNER JOIN customer t2
+				USING(item)
+			INNER JOIN paid t3
+				USING(sals_id)
+			WHERE 1
+			<if test="#{!item.equals(empty)}">
+				AND t1.item = #{item}
+			</if>
+			<if test="#{!moon.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{moon}
+			</if>
+			<if test="#{!year.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{year}
+			</if>
+			<if test="#{!listStart.equals(empty)}">
+				AND t1.sals_id >= #{listStart}
+			</if>
+			<if test="#{!listFinish.equals(empty)}">
+				AND #{listFinish} >= t1.sals_id
+			</if>
+			<if test="#{trueSelect.equals(True)}">
+				AND t2.is_effectiveness = 1
+			</if>
+		)
+		SELECT 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+			SUM(money) AS 'data4'
+		FROM table1
+		GROUP BY 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+	</select>
+	<select id="tax" resultType="com.example.demo.ResultFormA">
+		WITH table1 AS(
+			SELECT t1.sals_id AS 'number',TIME_FORMAT(t1.day,'%Y') AS 'year',TIME_FORMAT(t1.day,'%c') AS 'moon',t2.name AS 'item',( t1.money * ( 1 + t1.tax ) ) AS 'money'
+				FROM sales t1
+			INNER JOIN customer t2
+				USING(item)
+			WHERE 1
+			<if test="#{!item.equals(empty)}">
+				AND t1.item = #{item}
+			</if>
+			<if test="#{!moon.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{moon}
+			</if>
+			<if test="#{!year.equals(empty)}">
+				AND TIME_FORMAT(t1.day,'%c') = #{year}
+			</if>
+			<if test="#{!listStart.equals(empty)}">
+				AND t1.sals_id >= #{listStart}
+			</if>
+			<if test="#{!listFinish.equals(empty)}">
+				AND #{listFinish} >= t1.sals_id
+			</if>
+			<if test="#{trueSelect.equals(True)}">
+				AND t2.is_effectiveness = 1
+			</if>
+		)
+		SELECT 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+			SUM(money) AS 'data4'
+		FROM table1
+		GROUP BY 
+			<if test="#{yearSelect.equals(True)}">
+				year AS 'data1'
+			</if>
+			<if test="#{moonSelect.equals(True)}">
+				moon AS 'data2'
+			</if>
+			<if test="#{itemSelect.equals(True)}">
+				item AS 'data3'
+			</if>
+	</select>
+</mapper>

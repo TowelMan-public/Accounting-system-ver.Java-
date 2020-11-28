@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<h2>検索結果♪</h2>
+		<table border="1">
+  			<tr>
+  				<td th:each="column : ${ResultColumn}" th:text="S{column.data}"><td>
+  			</tr>
+  			<tr th:each="result1 : ${ResultForm}">
+  				<td th:each="result2 : ${result1}" th:text="${result2.data}"><td>
+  			</tr>
+  		</table>
+  	</body>
+</html>
