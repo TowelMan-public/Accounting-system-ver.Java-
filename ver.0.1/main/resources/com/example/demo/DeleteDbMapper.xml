@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.DeleteDbMapper">
+	<delete id="Sales">
+		DELETE FROM sales WHERE sale_id = #{id}
+	</delete>
+	<delete id="paid">
+		DELETE FROM paid WHERE id = #{id}
+	</delete>
+	<delete id="expensesItem">
+		DELETE FROM expenses_item WHERE item = #{id}
+	</delete>
+	<delete id="tax">
+		DELETE FROM paid WHERE id = #{id}
+		DELETE FROM sales WHERE sale_id = #{id}
+	</delete>
+	<delete id="unpaid">
+		DELETE FROM paid WHERE id = #{id}
+		DELETE FROM sales WHERE sale_id = #{id}
+	</delete>
+	<delete id="company">
+		DELETE FROM customer WHERE item = #{id}
+	</delete>
+	<delete id="expenses">
+		DELETE FROM expenses WHERE id = #{id}
+	</delete>
+</mapper>

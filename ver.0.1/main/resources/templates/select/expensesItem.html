@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<h2>検索結果♪</h2>
+		<table border="1">
+  			<tr>
+  				<td>番号</td>
+  				<td>項目</td>
+  				<td>利率</td>
+  				<td>有効/無効</td>
+  			</tr>
+  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+  				<td th:text="*{number}"></td>
+		     	<td th:text="*{name}"></td>
+		     	<td th:text="*{rate}"></td>
+		     	<td th:text="*{effectiveness}"></td>
+  			</tr>
+  		</table>
+  		
+  		<h2>削除</h2>
+  		<form method="post" th:action="@{/home/select/delete/expensesItem}" th:object="${DeleteForm}">
+  			<p>削除する行の番号<input type="text" name="number" /></p>
+  			<p><input type="submit" value="削除" /></p>
+  		</form>
+  		<h2>変更</h2>
+  		<form method="post" th:action="@{/home/select/update/expensesItem}" th:object="${ExpensesItemForm}">
+  			<p>番号：<input type="text" name="number" /></p>
+  			<p>経費の項目名: <input type="text" name="name" /></p>
+			<p>経費の利率: <input type="text" name="rate" /></p>
+			<p>有効/無効: <input type="text" name="effectiveness" /></p>
+  			<p><input type="submit" value="変更" /></p>
+  		</form>
+	</body>
+</html>

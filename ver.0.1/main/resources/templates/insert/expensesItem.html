@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<h2>経費の項目の登録</h2>
+		<form th:action="@{/insert/expensesItem/do}" th:object="${InsertExpensesItemForm}" method="post">
+			<p>経費の項目名: <input type="text" name="item" /></p>
+			<p>経費の利率: <input type="text" name="rate" /></p>
+			<input type="checkbox" name="isNext" th:value="${true}">続けて登録する</input>
+			<input type="submit" value="登録" />
+		</form>
+	</body>
+</html>

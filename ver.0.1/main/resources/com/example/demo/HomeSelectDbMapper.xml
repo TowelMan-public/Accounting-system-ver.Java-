@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.HomeSelectDbMapper">
+	<select id="expensesItem" resultType="com.example.demo.ExpensesItemForm">
+		SELECT item AS number,name,rate,is_effectiveness AS effectiveness
+			FROM expenses_item
+		WHERE 1
+		<if test="#{trueSelect.equals(True)}">
+			AND is_effectiveness = 1
+		</if>
+	</select>
+	<select id="expenses" resultType="com.example.demo.ExpensesForm">
+		SELECT t1.id AS 'number',t1.day AS 'date',t2.name AS 'expenses',t1.money AS 'money'
+			FROM expenses t1
+		INNER JOIN expenses_item t2
+			USING(item)
+		WHERE 1
+		<if test="item!=empty">
+			AND t1.item = #{item}
+		</if>
+		<if test="moon!=empty">
+			AND DATE_FORMAT(t1.day,'%c') = #{moon}
+		</if>
+		<if test="year!=empty">
+			AND DATE_FORMAT(t1.day,'%Y') = #{year}
+		</if>
+		<if test="listStart!=empty">
+			AND t1.id >= #{listStart}
+		</if>
+		<if test="listFinish!=empty">
+			AND #{listFinish} >= t1.id
+		</if>
+		<if test="trueSelect!=empty">
+			AND t2.is_effectiveness = 1
+		</if>
+	</select>
+	<select id="company" resultType="com.example.demo.CompanyForm">
+		SELECT item AS number,name,is_effectiveness AS effectiveness
+			FROM customer
+		WHERE 1
+		<if test="#{trueSelect.equals(True)}">
+			AND is_effectiveness = 1
+		</if>
+	</select>
+	<select id="Sales" resultType="com.example.demo.PaidForm">
+		SELECT t1.sale_id AS 'number',t1.day AS 'date',t2.name AS 'company',t1.money AS 'money',t1.tax AS 'tax',t1.person AS 'personName',t1.subject AS 'subject'
+			FROM sales t1
+		INNER JOIN customer t2
+			USING(item)
+		WHERE 1
+		<if test="!item.equals(empty)">
+			AND t1.item = #{item}
+		</if>
+		<if test="!moon.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{moon}
+		</if>
+		<if test="!year.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{year}
+		</if>
+		<if test="!listStart.equals(empty)">
+			AND t1.sale_id >= #{listStart}
+		</if>
+		<if test="!listFinish.equals(empty)">
+			AND #{listFinish} >= t1.sale_id
+		</if>
+		<if test="trueSelect.equals(True)">
+			AND t2.is_effectiveness = 1
+		</if>
+	</select>
+	<select id="paid" resultType="com.example.demo.PaidForm">
+		SELECT t1.sale_id AS 'number',t1.day AS 'date',t2.name AS 'company',t3.money AS 'money',t1.tax AS 'tax',t1.person AS 'personName',t1.subject AS 'subject'
+			FROM sales t1
+		INNER JOIN customer t2
+			USING(item)
+		INNER JOIN paid t3
+			USING(sale_id)
+		WHERE 1
+		<if test="!item.equals(empty)">
+			AND t1.item = #{item}
+		</if>
+		<if test="!moon.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{moon}
+		</if>
+		<if test="!year.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{year}
+		</if>
+		<if test="!listStart.equals(empty)">
+			AND t1.sale_id >= #{listStart}
+		</if>
+		<if test="!listFinish.equals(empty)">
+			AND #{listFinish} >= t1.sale_id
+		</if>
+		<if test="trueSelect.equals(True)">
+			AND t2.is_effectiveness = 1
+		</if>
+	</select>
+	<select id="unpaid" resultType="com.example.demo.PaidForm">
+		SELECT t1.sale_id AS 'number',t1.day AS 'date',t2.name AS 'company',(t1.money - t3.money) AS 'money',t1.tax AS 'tax',t1.person AS 'personName',t1.subject AS 'subject'
+			FROM sales t1
+		INNER JOIN customer t2
+			USING(item)
+		INNER JOIN paid t3
+			USING(sale_id)
+		WHERE 1
+		<if test="!item.equals(empty)">
+			AND t1.item = #{item}
+		</if>
+		<if test="!moon.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{moon}
+		</if>
+		<if test="!year.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{year}
+		</if>
+		<if test="!listStart.equals(empty)">
+			AND t1.sale_id >= #{listStart}
+		</if>
+		<if test="!listFinish.equals(empty)">
+			AND #{listFinish} >= t1.sale_id
+		</if>
+		<if test="trueSelect.equals(True)">
+			AND t2.is_effectiveness = 1
+		</if>
+	</select>
+	<select id="tax" resultType="com.example.demo.PaidForm">
+		SELECT t1.sale_id AS 'number',t1.day AS 'date',t2.name AS 'company',( t1.money * ( 1 + t1.tax ) ) AS 'money',t1.person AS 'personName',t1.subject AS 'subject'
+			FROM sales t1
+		INNER JOIN customer t2
+			USING(item)
+		WHERE 1
+		<if test="!item.equals(empty)">
+			AND t1.item = #{item}
+		</if>
+		<if test="!moon.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{moon}
+		</if>
+		<if test="!year.equals(empty)">
+			AND DATE_FORMAT(t1.day,'%c') = #{year}
+		</if>
+		<if test="!listStart.equals(empty)">
+			AND t1.sale_id >= #{listStart}
+		</if>
+		<if test="!listFinish.equals(empty)">
+			AND #{listFinish} >= t1.sale_id
+		</if>
+		<if test="trueSelect.equals(True)">
+			AND t2.is_effectiveness = 1
+		</if>
+	</select>
+</mapper>

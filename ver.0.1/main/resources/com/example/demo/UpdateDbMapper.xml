@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.UpdateDbMapper">
+	<update id="expensesItem">
+		UPDATE expenses_item SET name = #{name},rate = #{rate},is_effectiveness = #{is_effectiveness} WHERE item=#{number}
+	</update>
+	<update id="expenses">
+		UPDATE expenses SET day = #{date},item = #{expenses},money = #{money} WHERE id=#{number}
+	</update>
+	<update id="company">
+		UPDATE customer SET name = #{name},is_effectiveness = #{is_effectiveness} WHERE item=#{number}
+	</update>
+	<update id="Sales">
+		UPDATE sales SET day = #{date},item = #{company} ,money = #{money} ,tax = #{tax},person = #{personName} ,subject = #{subject}  WHERE sale_id=#{number}
+	</update>
+	<update id="paid">
+		UPDATE paid SET money = #{money} WHERE id=#{number}
+	</update>
+</mapper>

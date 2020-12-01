@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" href="style.css">
+	</head>
+	<body>
+		<h1>簡易的な会計システム♪</h1>
+		<h2>掛け売り（売上）の登録</h2>
+		<form th:action="@{/insert/Sales/do}" th:object="${InsertSalesForm}" method="post">
+			<p>日付: <input type="text" name="date" /></p>
+			<p>取引先（番号）: <input type="text" name="company" /></p>
+			<p>金額: <input type="text" name="money" /></p>
+			<p>個人名（省略可）: <input type="text" name="personName" /></p>
+			<p>件名（省略可）: <input type="text" name="subject" /></p>
+			<input type="checkbox" name="isNext" th:value="${true}">続けて登録する</input>
+			<input type="submit" value="登録" />
+		</form>
+	</body>
+</html>
