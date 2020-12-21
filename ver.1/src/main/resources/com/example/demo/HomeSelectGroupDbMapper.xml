@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.HomeSelectGroupDbMapper">
+	<select id="expenses" resultType="com.example.demo.ResultFormA">
+		<trim prefix="SELECT" prefixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year AS 'data1',
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon AS 'data2',
+			</if>
+			<if test="itemSelect.equals(True)">
+				item AS 'data3',
+			</if>
+			<if test="1 == 1">
+				SUM(money) AS 'data4'
+			</if>
+		</trim>
+		FROM expenses_g
+		WHERE 1
+			<if test="!item.equals(empty)">
+				AND item_id = #{item}
+			</if>
+			<if test="!moon.equals(empty)">
+				AND moon = #{moon}
+			</if>
+			<if test="!year.equals(empty)">
+				AND year = #{year}
+			</if>
+			<if test="!listStart.equals(empty)">
+				AND id >= #{listStart}
+			</if>
+			<if test="!listFinish.equals(empty)">
+				AND #{listFinish} >= id
+			</if>
+			<if test="trueSelect.equals(True)">
+				AND is_effectiveness = 1
+			</if>
+		<trim prefix="GROUP BY" suffixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year,
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon,
+			</if>
+			<if test="itemSelect.equals(True)">
+				item
+			</if>
+		</trim>
+	</select>
+	<select id="Sales" resultType="com.example.demo.ResultFormA">
+		<trim prefix="SELECT" prefixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year AS 'data1',
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon AS 'data2',
+			</if>
+			<if test="itemSelect.equals(True)">
+				item AS 'data3',
+			</if>
+			<if test="1 == 1">
+				SUM(money) AS 'data4'
+			</if>
+		</trim>
+		FROM sales_g
+		WHERE 1
+			<if test="!item.equals(empty)">
+				AND item_id = #{item}
+			</if>
+			<if test="!moon.equals(empty)">
+				AND moon = #{moon}
+			</if>
+			<if test="!year.equals(empty)">
+				AND year = #{year}
+			</if>
+			<if test="!listStart.equals(empty)">
+				AND id >= #{listStart}
+			</if>
+			<if test="!listFinish.equals(empty)">
+				AND #{listFinish} >= id
+			</if>
+			<if test="trueSelect.equals(True)">
+				AND is_effectiveness = 1
+			</if>
+		<trim prefix="GROUP BY" suffixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year,
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon,
+			</if>
+			<if test="itemSelect.equals(True)">
+				item
+			</if>
+		</trim>
+	</select>
+	<select id="paid" resultType="com.example.demo.ResultFormA">
+		<trim prefix="SELECT" prefixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year AS 'data1',
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon AS 'data2',
+			</if>
+			<if test="itemSelect.equals(True)">
+				item AS 'data3',
+			</if>
+			<if test="1 == 1">
+				SUM(money) AS 'data4'
+			</if>
+		</trim>
+		FROM paid_g
+		WHERE 1
+			<if test="!item.equals(empty)">
+				AND item_id = #{item}
+			</if>
+			<if test="!moon.equals(empty)">
+				AND moon = #{moon}
+			</if>
+			<if test="!year.equals(empty)">
+				AND year = #{year}
+			</if>
+			<if test="!listStart.equals(empty)">
+				AND id >= #{listStart}
+			</if>
+			<if test="!listFinish.equals(empty)">
+				AND #{listFinish} >= id
+			</if>
+			<if test="trueSelect.equals(True)">
+				AND is_effectiveness = 1
+			</if>
+		<trim prefix="GROUP BY" suffixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year,
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon,
+			</if>
+			<if test="itemSelect.equals(True)">
+				item
+			</if>
+		</trim>
+	</select>
+	<select id="unpaid" resultType="com.example.demo.ResultFormA">
+		<trim prefix="SELECT" prefixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year AS 'data1',
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon AS 'data2',
+			</if>
+			<if test="itemSelect.equals(True)">
+				item AS 'data3',
+			</if>
+			<if test="1 == 1">
+				SUM(money) AS 'data4'
+			</if>
+		</trim>
+		FROM unpaid_g
+		WHERE 1
+			<if test="!item.equals(empty)">
+				AND item_id = #{item}
+			</if>
+			<if test="!moon.equals(empty)">
+				AND moon = #{moon}
+			</if>
+			<if test="!year.equals(empty)">
+				AND year = #{year}
+			</if>
+			<if test="!listStart.equals(empty)">
+				AND id >= #{listStart}
+			</if>
+			<if test="!listFinish.equals(empty)">
+				AND #{listFinish} >= id
+			</if>
+			<if test="trueSelect.equals(True)">
+				AND is_effectiveness = 1
+			</if>
+		<trim prefix="GROUP BY" suffixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year,
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon,
+			</if>
+			<if test="itemSelect.equals(True)">
+				item
+			</if>
+		</trim>
+	</select>
+	<select id="tax" resultType="com.example.demo.ResultFormA">
+		<trim prefix="SELECT" prefixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year AS 'data1',
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon AS 'data2',
+			</if>
+			<if test="itemSelect.equals(True)">
+				item AS 'data3',
+			</if>
+			<if test="1 == 1">
+				SUM(money) AS 'data4'
+			</if>
+		</trim>
+		FROM tax_g
+		WHERE 1
+			<if test="!item.equals(empty)">
+				AND item_id = #{item}
+			</if>
+			<if test="!moon.equals(empty)">
+				AND moon = #{moon}
+			</if>
+			<if test="!year.equals(empty)">
+				AND year = #{year}
+			</if>
+			<if test="!listStart.equals(empty)">
+				AND id >= #{listStart}
+			</if>
+			<if test="!listFinish.equals(empty)">
+				AND #{listFinish} >= id
+			</if>
+			<if test="trueSelect.equals(True)">
+				AND is_effectiveness = 1
+			</if>
+		<trim prefix="GROUP BY" suffixOverrides=",">
+			<if test="yearSelect.equals(True)">
+				year,
+			</if>
+			<if test="moonSelect.equals(True)">
+				moon,
+			</if>
+			<if test="itemSelect.equals(True)">
+				item
+			</if>
+		</trim>
+	</select>
+</mapper>

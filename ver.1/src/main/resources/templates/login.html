@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+	</head>
+	<body>
+		<header>
+			<h1>簡易的な会計システム♪</h1>
+		</header>
+		<main class="login">
+		<h2>ログイン</h2>
+		<form th:action="@{/login}" method="post" th:object="${LoginForm}">
+			<p>ユーザー名：<input type="text" name="username" /></p>
+			<p>パスワード：<input type="text" name="password" /></p>
+			<p><input class="submit" type="submit" value="ログイン" /></p>
+		</form>
+		</main>
+	</body>
+</html>

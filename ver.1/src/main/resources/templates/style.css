@@ -1,0 +1,35 @@
+.login{
+	/*荳贋ｸ句ｷｦ蜿ｳ縺ｧ逵溘ｓ荳ｭ縺ｫ驟咲ｽｮ*/
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translateY(-50%) translateX(-50%);
+	-webkit- transform: translateY(-50%) translateX(-50%);
+}
+
+.page{
+	/*蟾ｦ蜿ｳ縺ｧ逵溘ｓ荳ｭ縺ｫ驟咲ｽｮ*/
+	text-align: center;
+}
+
+h1,h2,h3{
+	/*蟾ｦ蜿ｳ縺ｧ逵溘ｓ荳ｭ縺ｫ驟咲ｽｮ*/
+	text-align: center;
+}
+
+.submit{
+	/*蟾ｦ蜿ｳ縺ｧ逵溘ｓ荳ｭ縺ｫ驟咲ｽｮ*/
+	margin-left: auto;
+	margin-right: auto;
+	/*繝懊ち繝ｳ縺ｮ繝�繧ｶ繧､繝ｳ*/
+	background: #f1e767;
+	background: -webkit-gradient(linear, left top, left bottom, from(#f1e767), to(#feb645));
+	background: -webkit-linear-gradient(top, #f1e767 0%, #feb645 100%);
+	background: linear-gradient(to bottom, #f1e767 0%, #feb645 100%);
+}
+
+table{
+	/*蟾ｦ蜿ｳ縺ｧ逵溘ｓ荳ｭ縺ｫ驟咲ｽｮ*/
+	margin-left: auto;
+	margin-right: auto;
+}

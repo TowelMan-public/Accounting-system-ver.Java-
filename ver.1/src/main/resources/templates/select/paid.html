@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+	</head>
+	<body>
+		<header>
+			<h1>簡易的な会計システム♪</h1>
+		</header>
+		<main class="page">
+			<h2>検索結果♪</h2>
+			<table border="1">
+	  			<tr>
+	  				<td>番号</td>
+	  				<td>日付</td>
+	  				<td>社名</td>
+	  				<td>金額</td>
+	  				<td>消費税率</td>
+	  				<td>個人名</td>
+	  				<td>件名</td>
+	  			</tr>
+	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+	  				<td th:text="*{number}"></td>
+			     	<td th:text="*{date}"></td>
+			     	<td th:text="*{company}"></td>
+			     	<td th:text="*{money}"></td>
+			     	<td th:text="*{tax}"></td>
+			     	<td th:text="*{personName}"></td>
+			     	<td th:text="*{subject}"></td>
+	  			</tr>
+	  		</table>
+	  		
+	  		<h2>削除</h2>
+	  		<form method="post" th:action="@{delete}" th:object="${DeleteForm}">
+	  			<p>削除する行の番号<input type="text" name="number" /></p>
+	  			<p><input class="submit" type="submit" value="削除" /></p>
+	  		</form>
+	  		<h2>変更</h2>
+	  		<form method="post" th:action="@{update}" th:object="${PaidForm}">
+	  			<p>番号：<input type="text" name="number" /></p>
+	  			<p>日付：<input type="text" name="date" /></p>
+	  			<p>社名：<input type="text" name="company" /></p>
+	  			<p>金額: <input type="text" name="money" /></p>
+	  			<p>消費税率：<input type="text" name="tax" /></p>
+	  			<p>個人名：<input type="text" name="personName" /></p>
+	  			<p>件名：<input type="text" name="subject" /></p>
+	  			<p><input class="submit" type="submit" value="変更" /></p>
+	  		</form>
+	  	</main>
+	</body>
+</html>

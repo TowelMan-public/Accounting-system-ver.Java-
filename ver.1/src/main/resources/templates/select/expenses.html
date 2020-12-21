@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+
+<html lang="jp" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>簡易的な会計システム♪</title>
+		<meta charset="utf-8"/>
+		<link rel="stylesheet" type="text/css" th:href="@{/style.css}">
+	</head>
+	<body>
+		<header>
+			<h1>簡易的な会計システム♪</h1>
+		</header>
+		<main class="page">
+			<h2>検索結果♪</h2>
+			<table border="1">
+	  			<tr>
+	  				<td>番号</td>
+	  				<td>日付</td>
+	  				<td>項目</td>
+	  				<td>金額</td>
+	  			</tr>
+	  			<tr th:each="result : ${ResultForm}" th:object="${result}">
+	  				<td th:text="*{number}"></td>
+			     	<td th:text="*{date}"></td>
+			     	<td th:text="*{expenses}"></td>
+			     	<td th:text="*{money}"></td>
+	  			</tr>
+	  		</table>
+	  		
+	  		<h2>削除</h2>
+	  		<form method="post" th:action="@{/home/select/delete/expenses}" th:object="${DeleteForm}">
+	  			<p>削除する行の番号<input type="text" name="number" /></p>
+	  			<p><input class="submit" type="submit" value="削除" /></p>
+	  		</form>
+	  		<h2>変更</h2>
+	  		<form method="post" th:action="@{/home/select/update/expenses}" th:object="${ExpensesForm}">
+	  			<p>番号：<input type="text" name="number" /></p>
+	  			<p>日付: <input type="text" name="date" /></p>
+				<p>項目（番号で）: <input type="text" name="expenses" /></p>
+				<p>金額: <input type="text" name="money" /></p>
+	  			<p><input class="submit" type="submit" value="変更" /></p>
+	  		</form>
+  		</main>
+	</body>
+</html>
